@@ -112,6 +112,7 @@ public class mazeGen : MonoBehaviour
             GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
             plane.transform.position = new Vector3(this.x/2, 0, this.y/2);
             plane.transform.localScale = new Vector3(this.x/8, 0, this.y/8);
+            plane.GetComponent<Renderer>().material.color = Color.white;
             for(int i = 0; i < this.x; i++)
             {
                 for(int o = 0; o < this.y; o++)
@@ -121,6 +122,7 @@ public class mazeGen : MonoBehaviour
                         GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
                         cube.transform.localScale = new Vector3(1, 2, 1);
                         cube.transform.position = new Vector3(i, 1, o);
+                        cube.GetComponent<Renderer>().material.color = Color.white;
                     }
                 }
             }
