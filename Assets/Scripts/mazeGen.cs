@@ -2,8 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using UnityEngine;
 
-public class mazeGen
+public class mazeGen : MonoBehaviour
 {
     class gridCell
     {
@@ -23,7 +24,7 @@ public class mazeGen
     {
         private Stack<gridCell> visitedCells;
         private gridCell currCell;
-        private Random rnd = new Random();
+        private System.Random rnd = new System.Random();
         private gridCell[,] maze;
         private int x = 11, y = 11;
         private int startX, startY;
@@ -106,42 +107,29 @@ public class mazeGen
                 backtrack();
             }
         }
-        public void buildMaze(string name)
+        public void buildMaze()
         {
-			/*
-            name = "./"+name+".png";
-            int enlarge = 10;
-            Color black = Color.Black;
-            int newX = this.x*enlarge, newY = this.y*enlarge;
-            Bitmap image = new Bitmap(newX,newY);
-            for(int i = 0; i < newX; i+=enlarge)
+            GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
+            plane.transform.position = new Vector3(this.x/2, 0, this.y/2);
+            plane.transform.localScale = new Vector3(this.x/8, 0, this.y/8);
+            for(int i = 0; i < this.x; i++)
             {
-                for(int o = 0; o < newY; o+=enlarge)
+                for(int o = 0; o < this.y; o++)
                 {
-                    if(this.maze[i/enlarge,o/enlarge].path)
+                    if(!this.maze[i,o].path)
                     {
-                        for(int x = 0; x < enlarge; x++)
-                        {
-                            for(int y = 0; y < enlarge; y++)
-                            {
-                                image.SetPixel(i+x,o+y,Color.Gray);
-                            }
-                        }
+                        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                        cube.transform.localScale = new Vector3(1, 2, 1);
+                        cube.transform.position = new Vector3(i, 1, o);
                     }
-                    else
-                    {
-                        for(int x = 0; x < enlarge; x++)
-                        {
-                            for(int y = 0; y < enlarge; y++)
-                            {
-                                image.SetPixel(i+x,o+y,Color.DarkGray);
-                            }
-                        }
-                    } 
                 }
             }
-            image.Save(name);
-			*/
         }
     }
+    void Start()
+        {
+            gridMaze maze = new gridMaze(50,50);
+            maze.generateMaze();
+            maze.buildMaze();
+        }
 }
