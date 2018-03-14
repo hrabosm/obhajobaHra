@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class mazeGen : MonoBehaviour
 {
+    //public Transform wall;
     class gridCell
     {
         public int x;
@@ -107,7 +108,8 @@ public class mazeGen : MonoBehaviour
                 backtrack();
             }
         }
-        public void buildMaze()
+        
+        public void buildMaze(Transform wall)
         {
             /*
             GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
@@ -121,19 +123,23 @@ public class mazeGen : MonoBehaviour
                 {
                     if(!this.maze[i,o].path)
                     {
+                        Instantiate(wall, new Vector3(i, 0.5f, o), Quaternion.identity);
+                        /*
                         GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
                         cube.transform.localScale = new Vector3(1, 1, 1);
                         cube.transform.position = new Vector3(i, 0.5f, o);
                         cube.GetComponent<Renderer>().material.color = Color.white;
+                        */
                     }
                 }
             }
         }
     }
+    public Transform wall;
     void Start()
         {
             gridMaze maze = new gridMaze(50,50);
             maze.generateMaze();
-            maze.buildMaze();
+            maze.buildMaze(wall);
         }
 }
