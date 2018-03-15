@@ -3,9 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class mazeGen : MonoBehaviour
 {
+    public int size = 50;
+    public GameObject map;
+    public NavMeshSurface surface;
     //public Transform wall;
     class gridCell
     {
@@ -109,27 +113,15 @@ public class mazeGen : MonoBehaviour
             }
         }
         
-        public void buildMaze(Transform wall)
+        public void buildMaze(Transform wall, GameObject map)
         {
-            /*
-            GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-            plane.transform.position = new Vector3(this.x/2, 0, this.y/2);
-            plane.transform.localScale = new Vector3(this.x/8, 0, this.y/8);
-            plane.GetComponent<Renderer>().material.color = Color.white; 
-            */
             for(int i = 0; i < this.x; i++)
             {
                 for(int o = 0; o < this.y; o++)
                 {
                     if(!this.maze[i,o].path)
                     {
-                        Instantiate(wall, new Vector3(i, 0.5f, o), Quaternion.identity);
-                        /*
-                        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                        cube.transform.localScale = new Vector3(1, 1, 1);
-                        cube.transform.position = new Vector3(i, 0.5f, o);
-                        cube.GetComponent<Renderer>().material.color = Color.white;
-                        */
+                        Instantiate(wall, new Vector3(i, 0.5f, o), Quaternion.identity, map.transform);
                     }
                 }
             }
@@ -138,8 +130,9 @@ public class mazeGen : MonoBehaviour
     public Transform wall;
     void Start()
         {
-            gridMaze maze = new gridMaze(50,50);
+            gridMaze maze = new gridMaze(size,size);
             maze.generateMaze();
-            maze.buildMaze(wall);
+            maze.buildMaze(wall, map);
+            surface.BuildNavMesh();
         }
 }
