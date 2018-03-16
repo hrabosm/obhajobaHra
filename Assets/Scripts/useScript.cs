@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class pickUp : MonoBehaviour {
+public class useScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

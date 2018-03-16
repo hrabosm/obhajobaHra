@@ -33,6 +33,7 @@ public class mazeGen : MonoBehaviour
         private gridCell[,] maze;
         private int x = 11, y = 11;
         private int startX, startY;
+        public int[,] pickablesList;
         public gridMaze(int x, int y)
         {
             this.visitedCells = new Stack<gridCell>();
@@ -113,7 +114,7 @@ public class mazeGen : MonoBehaviour
             }
         }
         
-        public void buildMaze(Transform wall, GameObject map)
+        public void buildMaze(Transform wall, GameObject map, int countOfPickables, Transform pickable, Transform exit)
         {
             for(int i = 0; i < this.x; i++)
             {
@@ -125,14 +126,39 @@ public class mazeGen : MonoBehaviour
                     }
                 }
             }
+            buildMazePickables(countOfPickables, pickable, map, exit);
+        }
+        private void buildMazePickables(int count, Transform pickable, GameObject map, Transform exit)
+        {
+            int j, k;
+            pickablesList = new int[count,2];
+            for(int i = 0;i<count;i++)
+            {
+                pickablesList[i,0] = j = this.rnd.Next(0,this.x/2);
+                pickablesList[i,1] = k = this.rnd.Next(0,this.y/2);
+                for(int f = 0;f<i;f++)
+                {
+                    if(pickablesList[f,0] == j && pickablesList[f,1] == k)
+                    {
+                        Debug.Log("Same position!");
+                        pickablesList[i,0] = j = this.rnd.Next(0,this.x/2);
+                        pickablesList[i,1] = k = this.rnd.Next(0,this.y/2);
+                    }
+                }
+                Instantiate(pickable, new Vector3(pickablesList[i,0]*2 - 1, 0.005f, pickablesList[i,1]*2 - 1), Quaternion.identity, map.transform);
+            }
+            Instantiate(exit, new Vector3(this.x/2 - 1, 0.4f, this.y-1.51f), Quaternion.identity, map.transform);
         }
     }
     public Transform wall;
+    public Transform pickable;
+    public Transform exit;
+    public int countOfPickables;
     void Start()
-        {
-            gridMaze maze = new gridMaze(size,size);
-            maze.generateMaze();
-            maze.buildMaze(wall, map);
-            surface.BuildNavMesh();
-        }
+    {
+        gridMaze maze = new gridMaze(size,size);
+        maze.generateMaze();
+        maze.buildMaze(wall, map, countOfPickables, pickable, exit);
+        surface.BuildNavMesh();
+    }
 }

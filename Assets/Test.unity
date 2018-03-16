@@ -637,6 +637,9 @@ MonoBehaviour:
   map: {fileID: 545788814}
   surface: {fileID: 545788816}
   wall: {fileID: 4886755278382558, guid: 1317a153004602c41a1e89d6dfada03b, type: 2}
+  pickable: {fileID: 4054308967256436, guid: dd2c70b7b6a47d648a067849c5ff8a3b, type: 2}
+  exit: {fileID: 4295172225300806, guid: e7578473183437b4cb506a650110e700, type: 2}
+  countOfPickables: 6
 --- !u!4 &958202636
 Transform:
   m_ObjectHideFlags: 0
