@@ -145,7 +145,7 @@ public class mazeGen : MonoBehaviour
                         pickablesList[i,1] = k = this.rnd.Next(0,this.y/2);
                     }
                 }
-                Instantiate(pickable, new Vector3(pickablesList[i,0]*2 - 1, 0.005f, pickablesList[i,1]*2 - 1), Quaternion.identity, map.transform);
+                Instantiate(pickable, new Vector3(pickablesList[i,0]*2 + 1, 0.005f, pickablesList[i,1]*2 + 1), Quaternion.identity, map.transform);
             }
             Instantiate(exit, new Vector3(this.x/2 - 1, 0.4f, this.y-1.51f), Quaternion.identity, map.transform);
         }

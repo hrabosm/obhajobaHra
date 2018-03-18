@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 23072946283642780}
   m_Layer: 0
   m_Name: DoorPlaceHolder
-  m_TagString: Untagged
+  m_TagString: usable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56,7 +56,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: f79332b88345e76428e9f18cf7aaccf7, type: 2}
+  - {fileID: 2100000, guid: 3917f000519cd2d4d87782c7e50a9eaf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
