@@ -77,7 +77,7 @@ GameObject:
   - component: {fileID: 65355376905654974}
   - component: {fileID: 23901199257924986}
   m_Layer: 0
-  m_Name: ScaryPlaceHolder
+  m_Name: ScaryPlaceholder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
