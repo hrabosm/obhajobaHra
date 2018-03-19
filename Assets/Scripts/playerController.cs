@@ -6,6 +6,8 @@ public class playerController : MonoBehaviour {
 
 	private Vector3 moveDir;
 	private Vector3 rotation;
+	private float xMax = 0.7f;
+	private float xMin = -0.7f;
 	public GameObject player;
 	public Camera playerCam;
 	public float speed = 1.36f;
@@ -22,9 +24,27 @@ public class playerController : MonoBehaviour {
 		Cursor.lockState = CursorLockMode.Locked;
 		moveDir = new Vector3(Input.GetAxis("Horizontal"),0 ,Input.GetAxis("Vertical"));
 		moveDir = transform.TransformDirection(moveDir);
-		rotation = new Vector3(0, Input.GetAxis("Mouse X") * -1 * sensitivity, 0);
-		player.transform.Rotate(0,rotation.y * -1,0);
-		playerCam.transform.eulerAngles -= new Vector3(Input.GetAxis("Mouse Y") * sensitivity, 0, 0);
+		player.transform.Rotate(new Vector3(0, Input.GetAxis("Mouse X") * sensitivity, 0));
+		if(playerCam.transform.localRotation.x > xMin && playerCam.transform.localRotation.x < xMax)
+		{
+			Debug.Log("3");
+			playerCam.transform.Rotate(new Vector3(Input.GetAxis("Mouse Y") * sensitivity * -1, 0, 0));
+		}
+		else if(playerCam.transform.localRotation.x > xMin && Input.GetAxis("Mouse Y")*-1 < 0)
+		{
+			Debug.Log("2");
+			playerCam.transform.Rotate(new Vector3(Input.GetAxis("Mouse Y") * sensitivity * -1, 0, 0));
+		}
+		else if(playerCam.transform.localRotation.x < xMax && Input.GetAxis("Mouse Y")*-1 > 0)
+		{
+			Debug.Log("1");
+			playerCam.transform.Rotate(new Vector3(Input.GetAxis("Mouse Y") * sensitivity * -1, 0, 0));
+		}
+		else
+		{
+			Debug.Log("0");
+			playerCam.transform.Rotate(Vector3.zero);
+		}
 		if(Input.GetKey(KeyCode.LeftShift))
 		{
 			controller.Move(moveDir  * Time.deltaTime * speed * 2f);
