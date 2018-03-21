@@ -149,7 +149,13 @@ public class mazeGen : MonoBehaviour
             }
             Instantiate(exit, new Vector3(this.x/2 - 1, 0.4f, this.y-1.51f), Quaternion.identity, map.transform);
             surface.BuildNavMesh();
-            Instantiate(enemy, new Vector3(this.x/2 - 1, 0.65f, this.y - 2), Quaternion.identity, map.transform);
+            GameObject en = Instantiate(enemy, new Vector3(21, 0.675f, 1), Quaternion.identity).gameObject;
+            en.GetComponent<NavMeshAgent>().enabled = true;
+            if(en.GetComponent<NavMeshAgent>().Warp(new Vector3(21, 0.675f, 1)))
+            {
+                Debug.Log("Warp successfull!");
+                en.GetComponent<enemyController>().enabled = true;
+            }
         }
     }
     public Transform wall;

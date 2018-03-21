@@ -11,7 +11,9 @@ public class enemyController : MonoBehaviour {
 	void Start () 
 	{
 		NavMeshAgent agent = GetComponent<NavMeshAgent>();
-		//agent.destination = target.position;	
-		agent.destination = new Vector3(1f,0.05f,3f);	
+		if(agent.isOnNavMesh)
+		{
+			agent.destination = new Vector3(1f,0.05f,3f);
+		}
 	}
 }
