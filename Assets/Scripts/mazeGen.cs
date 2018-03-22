@@ -5,6 +5,10 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.AI;
 
+public static class globalVars
+{
+    public static GameObject[] pickablesList;
+}
 public class mazeGen : MonoBehaviour
 {
     public int size = 50;
@@ -147,6 +151,7 @@ public class mazeGen : MonoBehaviour
                 pickablesList[i] = Instantiate(pickable, new Vector3(j*2 + 1, 0.005f, k*2 + 1), Quaternion.identity, map.transform).gameObject;
                 Debug.Log(pickablesList[i].transform.position.ToString());
             }
+            globalVars.pickablesList = pickablesList;
             Instantiate(exit, new Vector3(this.x/2 - 1, 0.4f, this.y-1.51f), Quaternion.identity, map.transform);
             surface.BuildNavMesh();
             GameObject en = Instantiate(enemy, new Vector3(21, 0.675f, 1), Quaternion.identity).gameObject;

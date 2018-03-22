@@ -5,15 +5,25 @@ using UnityEngine.AI;
 
 public class enemyController : MonoBehaviour {
 
-	//public Transform target;
-
-	// Use this for initialization
+	private NavMeshAgent agent;
+	private GameObject[] pickablesList;
+	private System.Random random;
 	void Start () 
 	{
-		NavMeshAgent agent = GetComponent<NavMeshAgent>();
-		if(agent.isOnNavMesh)
+		pickablesList = globalVars.pickablesList;
+		agent = GetComponent<NavMeshAgent>();
+		travelTo();
+	}
+	private void travelTo()
+	{
+		Debug.Log("Generating new destination.");
+		agent.destination = pickablesList[0].transform.position;
+		Debug.Log("Getting to my destination.");
+		if(agent.pathStatus == NavMeshPathStatus.PathComplete)
 		{
-			agent.destination = new Vector3(1f,0.05f,3f);
+			Debug.Log("Complete");
 		}
+		Debug.Log("Arrived at my destination!");
+		travelTo();
 	}
 }
