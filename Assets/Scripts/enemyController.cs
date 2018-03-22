@@ -6,24 +6,30 @@ using UnityEngine.AI;
 public class enemyController : MonoBehaviour {
 
 	private NavMeshAgent agent;
-	private GameObject[] pickablesList;
-	private System.Random random;
+	private int lenght;
 	void Start () 
 	{
-		pickablesList = globalVars.pickablesList;
 		agent = GetComponent<NavMeshAgent>();
+		lenght = globalVars.pickablesList.Length;
 		travelTo();
 	}
 	private void travelTo()
 	{
+		Debug.Log(agent.pathStatus);
 		Debug.Log("Generating new destination.");
-		agent.destination = pickablesList[0].transform.position;
+		agent.destination = globalVars.pickablesList[Random.Range(0,lenght)].transform.position;
 		Debug.Log("Getting to my destination.");
-		if(agent.pathStatus == NavMeshPathStatus.PathComplete)
+		StartCoroutine(Wait());
+	}
+	IEnumerator Wait()
+	{
+		Debug.Log("Starting to wait!");
+		while(agent.gameObject.transform.position.x != agent.destination.x && agent.gameObject.transform.position.y != agent.destination.y)
 		{
-			Debug.Log("Complete");
+
 		}
-		Debug.Log("Arrived at my destination!");
+		Debug.Log("I am here!");
+		yield return new WaitForSeconds(10);
 		travelTo();
 	}
 }
