@@ -1240,6 +1240,7 @@ MonoBehaviour:
   pickable: {fileID: 4054308967256436, guid: dd2c70b7b6a47d648a067849c5ff8a3b, type: 2}
   exit: {fileID: 4295172225300806, guid: e7578473183437b4cb506a650110e700, type: 2}
   enemy: {fileID: 4611613770228658, guid: ef35c33ef45eb6446bbdf8178adad93d, type: 2}
+  player: {fileID: 760108631}
   countOfPickables: 7
 --- !u!4 &958202636
 Transform:

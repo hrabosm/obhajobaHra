@@ -6,15 +6,18 @@ public class tutorialController : MonoBehaviour {
 
 	public GameObject tutorialMovement;
 	public GameObject tutorialOther;
+	private bool moved = false;
 	void Update () 
 	{
-		if(Input.GetAxis("Horizontal") > 1 || Input.GetAxis("Vertical") > 1 || Input.GetAxis("Horizontal") < 1 || Input.GetAxis("Vertical") < 1)
+		if((Input.GetAxis("Horizontal") > 0 || Input.GetAxis("Vertical") > 0 || Input.GetAxis("Horizontal") < 0 || Input.GetAxis("Vertical") < 0) && !moved)
 		{
+			moved = true;
 			StartCoroutine(Moved());
 		}
 	}
 	IEnumerator Moved()
 	{
+		Debug.Log("Moved");
 		yield return new WaitForSeconds(5);
 		Destroy(tutorialMovement);
 		Destroy(tutorialOther);

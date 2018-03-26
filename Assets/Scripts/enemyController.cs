@@ -26,7 +26,7 @@ public class enemyController : MonoBehaviour {
 		Debug.Log("Starting to wait!");
 		while(agent.gameObject.transform.position.x != agent.destination.x && agent.gameObject.transform.position.y != agent.destination.y)
 		{
-
+			yield return new WaitForSeconds(1);
 		}
 		Debug.Log("I am here!");
 		yield return new WaitForSeconds(10);

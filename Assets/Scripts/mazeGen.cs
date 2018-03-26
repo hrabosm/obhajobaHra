@@ -118,7 +118,7 @@ public class mazeGen : MonoBehaviour
             }
         }
         
-        public void buildMaze(Transform wall, GameObject map, int countOfPickables, Transform pickable, Transform exit, Transform enemy, NavMeshSurface surface)
+        public void buildMaze(Transform wall, GameObject map)
         {
             for(int i = 0; i < this.x; i++)
             {
@@ -130,9 +130,8 @@ public class mazeGen : MonoBehaviour
                     }
                 }
             }
-            buildMazePickables(countOfPickables, pickable, map, exit, enemy, surface);
         }
-        private void buildMazePickables(int count, Transform pickable, GameObject map, Transform exit, Transform enemy, NavMeshSurface surface)
+        public void buildMazePickables(int count, Transform pickable, GameObject map, Transform exit, Transform enemy, NavMeshSurface surface, Transform player)
         {
             int j, k;
             for(int i = 0;i<count;i++)
@@ -152,11 +151,12 @@ public class mazeGen : MonoBehaviour
                 Debug.Log(pickablesList[i].transform.position.ToString());
             }
             globalVars.pickablesList = pickablesList;
+            player.transform.position = new Vector3(this.startX, player.transform.position.y, this.startY);
             Instantiate(exit, new Vector3(this.x/2 - 1, 0.4f, this.y-1.51f), Quaternion.identity, map.transform);
             surface.BuildNavMesh();
-            GameObject en = Instantiate(enemy, new Vector3(21, 0.675f, 1), Quaternion.identity).gameObject;
+            GameObject en = Instantiate(enemy, new Vector3(19, 0.675f, 39), Quaternion.identity).gameObject;
             en.GetComponent<NavMeshAgent>().enabled = true;
-            if(en.GetComponent<NavMeshAgent>().Warp(new Vector3(21, 0.675f, 1)))
+            if(en.GetComponent<NavMeshAgent>().Warp(new Vector3(19, 0.675f, 39)))
             {
                 Debug.Log("Warp successfull!");
                 en.GetComponent<enemyController>().enabled = true;
@@ -167,11 +167,13 @@ public class mazeGen : MonoBehaviour
     public Transform pickable;
     public Transform exit;
     public Transform enemy;
+    public Transform player;
     public int countOfPickables;
     void Start()
     {
         gridMaze maze = new gridMaze(size,size);
         maze.generateMaze();
-        maze.buildMaze(wall, map, countOfPickables, pickable, exit, enemy, surface);
+        maze.buildMaze(wall, map);
+        maze.buildMazePickables(countOfPickables, pickable, map, exit, enemy, surface, player);
     }
 }
