@@ -131,7 +131,7 @@ public class mazeGen : MonoBehaviour
                 }
             }
         }
-        public void buildMazePickables(int count, Transform pickable, GameObject map, Transform exit, Transform enemy, NavMeshSurface surface, Transform player)
+        public void buildMazePickables(int count, Transform pickable, GameObject map, Transform exit, Transform enemy, NavMeshSurface surface, Transform player, shaderFix shaderFix)
         {
             int j, k;
             for(int i = 0;i<count;i++)
@@ -151,7 +151,7 @@ public class mazeGen : MonoBehaviour
                 Debug.Log(pickablesList[i].transform.position.ToString());
             }
             globalVars.pickablesList = pickablesList;
-            player.transform.position = new Vector3(this.startX, player.transform.position.y, this.startY);
+            player.transform.position = new Vector3(this.startX*2+1, player.transform.position.y, this.startY*2+1);
             Instantiate(exit, new Vector3(this.x/2 - 1, 0.4f, this.y-1.51f), Quaternion.identity, map.transform);
             surface.BuildNavMesh();
             GameObject en = Instantiate(enemy, new Vector3(19, 0.675f, 39), Quaternion.identity).gameObject;
@@ -161,8 +161,10 @@ public class mazeGen : MonoBehaviour
                 Debug.Log("Warp successfull!");
                 en.GetComponent<enemyController>().enabled = true;
             }
+            shaderFix.changeShader();
         }
     }
+    public shaderFix shaderFix;
     public Transform wall;
     public Transform pickable;
     public Transform exit;
@@ -174,6 +176,6 @@ public class mazeGen : MonoBehaviour
         gridMaze maze = new gridMaze(size,size);
         maze.generateMaze();
         maze.buildMaze(wall, map);
-        maze.buildMazePickables(countOfPickables, pickable, map, exit, enemy, surface, player);
+        maze.buildMazePickables(countOfPickables, pickable, map, exit, enemy, surface, player, shaderFix);
     }
 }
