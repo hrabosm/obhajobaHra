@@ -161,7 +161,7 @@ public class mazeGen : MonoBehaviour
                 Debug.Log("Warp successfull!");
                 en.GetComponent<enemyController>().enabled = true;
             }
-            //shaderFix.changeShader();
+            shaderFix.changeShader();
         }
     }
     public shaderFix shaderFix;
