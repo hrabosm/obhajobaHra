@@ -479,9 +479,10 @@ GameObject:
   m_Component:
   - component: {fileID: 498571548}
   - component: {fileID: 498571549}
+  - component: {fileID: 498571550}
   m_Layer: 0
   m_Name: GameController
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -512,6 +513,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorialMovement: {fileID: 535251692}
   tutorialOther: {fileID: 541682067}
+--- !u!114 &498571550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 498571547}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0563d4a7305975746a839151caef892a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &535251692
 GameObject:
   m_ObjectHideFlags: 0
@@ -729,7 +741,7 @@ GameObject:
   - component: {fileID: 760108634}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1291,6 +1303,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1115027539}
   - component: {fileID: 1115027542}
+  - component: {fileID: 1115027540}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -1311,6 +1324,18 @@ Transform:
   m_Father: {fileID: 186180970}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1115027540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1115027538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: bfa0e7509dca4104399e253a107a9af0, type: 2}
 --- !u!20 &1115027542
 Camera:
   m_ObjectHideFlags: 0
@@ -1319,7 +1344,7 @@ Camera:
   m_GameObject: {fileID: 1115027538}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 3
+  m_ClearFlags: 4
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -1332,7 +1357,7 @@ Camera:
   field of view: 60
   orthographic: 0
   orthographic size: 5
-  m_Depth: -2
+  m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -1340,11 +1365,11 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 1
+  m_HDR: 0
   m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
+  m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
 --- !u!1 &1148217908

@@ -69,7 +69,7 @@ MonoBehaviour:
       screenEdgeMask:
         intensity: 0.03
   depthOfField:
-    m_Enabled: 1
+    m_Enabled: 0
     m_Settings:
       focusDistance: 10
       aperture: 5.6
@@ -97,24 +97,24 @@ MonoBehaviour:
       logMin: -8
       logMax: 4
   bloom:
-    m_Enabled: 1
+    m_Enabled: 0
     m_Settings:
       bloom:
         intensity: 1
         threshold: 1
         softKnee: 1
-        radius: 7
+        radius: 3
         antiFlicker: 0
       lensDirt:
         texture: {fileID: 0}
         intensity: 3
   colorGrading:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       tonemapping:
         tonemapper: 2
         neutralBlackIn: 0.01
-        neutralWhiteIn: 7
+        neutralWhiteIn: 20
         neutralBlackOut: 0.02
         neutralWhiteOut: 9
         neutralWhiteLevel: 11.9
