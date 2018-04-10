@@ -7,11 +7,13 @@ public class enemyController : MonoBehaviour {
 
 	private NavMeshAgent agent;
 	private int lenght;
+	private Animator robotAnim;
 	RaycastHit hit;
 	public int maxRange = 20;
 	private float tempSpeed;
 	void Start () 
 	{
+		robotAnim = GameObject.FindGameObjectWithTag("RobotAnim").GetComponent<Animator>();
 		agent = GetComponent<NavMeshAgent>();
 		lenght = globalVars.pickablesList.Length;
 		tempSpeed = agent.speed;
@@ -34,6 +36,7 @@ public class enemyController : MonoBehaviour {
 		}
 		Debug.Log("I am here!");
 		agent.speed = tempSpeed;
+		robotAnim.SetBool("running", false);
 		yield return new WaitForSeconds(10);
 		travelTo();
 	}
@@ -53,6 +56,7 @@ public class enemyController : MonoBehaviour {
 				if(hit.transform.tag == "Player")
 				{
 					agent.speed *= 2f;
+					robotAnim.SetBool("running", true);
 					agent.destination = hit.transform.position;
 				}
 			}
