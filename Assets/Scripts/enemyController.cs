@@ -11,9 +11,10 @@ public class enemyController : MonoBehaviour {
 	RaycastHit hit;
 	public int maxRange = 20;
 	private float tempSpeed;
+	private float runningSpeed = 1.75f;
 	void Start () 
 	{
-		robotAnim = GameObject.FindGameObjectWithTag("RobotAnim").GetComponent<Animator>();
+		robotAnim = transform.GetChild(0).GetComponent<Animator>();
 		agent = GetComponent<NavMeshAgent>();
 		lenght = globalVars.pickablesList.Length;
 		tempSpeed = agent.speed;
@@ -24,7 +25,7 @@ public class enemyController : MonoBehaviour {
 		Debug.Log(agent.pathStatus);
 		Debug.Log("Generating new destination.");
 		agent.destination = globalVars.pickablesList[Random.Range(0,lenght)].transform.position;
-		robotAnim.SetBool("standing", false);
+		robotAnim.SetFloat("Speed", 1f);
 		Debug.Log("Getting to my destination.");
 		StartCoroutine(Wait());
 	}
@@ -37,8 +38,7 @@ public class enemyController : MonoBehaviour {
 		}
 		Debug.Log("I am here!");
 		agent.speed = tempSpeed;
-		robotAnim.SetBool("running", false);
-		robotAnim.SetBool("standing", true);
+		robotAnim.SetFloat("Speed", 0f);
 		yield return new WaitForSeconds(5);
 		travelTo();
 	}
@@ -57,9 +57,9 @@ public class enemyController : MonoBehaviour {
 			{
 				if(hit.transform.tag == "Player")
 				{
-					agent.speed *= 2f;
-					robotAnim.SetBool("standing", false);
-					robotAnim.SetBool("running", true);
+					agent.speed = runningSpeed;
+					robotAnim.SetFloat("Speed",2f);
+					Debug.Log(robotAnim.GetFloat("Speed"));
 					agent.destination = hit.transform.position;
 				}
 			}
