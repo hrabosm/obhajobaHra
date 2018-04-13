@@ -12,12 +12,16 @@ public class enemyController : MonoBehaviour {
 	public int maxRange = 20;
 	private float tempSpeed;
 	private float runningSpeed = 1.75f;
+	public AudioSource walking;
+	public AudioSource running;
 	void Start () 
 	{
 		robotAnim = transform.GetChild(0).GetComponent<Animator>();
 		agent = GetComponent<NavMeshAgent>();
 		lenght = globalVars.pickablesList.Length;
 		tempSpeed = agent.speed;
+		walking.enabled = true;
+		running.enabled = true;
 		travelTo();
 	}
 	private void travelTo()
@@ -26,6 +30,8 @@ public class enemyController : MonoBehaviour {
 		Debug.Log("Generating new destination.");
 		agent.destination = globalVars.pickablesList[Random.Range(0,lenght)].transform.position;
 		robotAnim.SetFloat("Speed", 1f);
+		walking.mute = false;
+		running.mute = true;
 		Debug.Log("Getting to my destination.");
 		StartCoroutine(Wait());
 	}
@@ -39,6 +45,8 @@ public class enemyController : MonoBehaviour {
 		Debug.Log("I am here!");
 		agent.speed = tempSpeed;
 		robotAnim.SetFloat("Speed", 0f);
+		walking.mute = true;
+		walking.mute = true;
 		yield return new WaitForSeconds(5);
 		travelTo();
 	}
@@ -58,7 +66,12 @@ public class enemyController : MonoBehaviour {
 				if(hit.transform.tag == "Player")
 				{
 					agent.speed = runningSpeed;
-					robotAnim.SetFloat("Speed",2f);
+					if(robotAnim.GetFloat("Speed") < 2f)
+					{
+						robotAnim.SetFloat("Speed",2f);
+						walking.mute = true;
+						running.mute = false;
+					}
 					Debug.Log(robotAnim.GetFloat("Speed"));
 					agent.destination = hit.transform.position;
 				}
