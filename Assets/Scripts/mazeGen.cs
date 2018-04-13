@@ -152,15 +152,24 @@ public class mazeGen : MonoBehaviour
             }
             globalVars.pickablesList = pickablesList;
             player.transform.position = new Vector3(this.startX*2+1, player.transform.position.y, this.startY*2+1);
-            Instantiate(exit, new Vector3(this.x/2 - 1, 0.4f, this.y-1.51f), Quaternion.identity, map.transform);
+            Instantiate(exit, new Vector3(this.x/2, 0.4f, this.y-1.51f), Quaternion.identity, map.transform);
             surface.BuildNavMesh();
-            GameObject en = Instantiate(enemy, new Vector3(19, 0.675f, 39), Quaternion.identity).gameObject;
+            GameObject en = Instantiate(enemy, new Vector3(this.x/2, 0.675f, this.y), Quaternion.identity).gameObject;
             en.GetComponent<NavMeshAgent>().enabled = true;
-            if(en.GetComponent<NavMeshAgent>().Warp(new Vector3(19, 0.675f, 39)))
+            if(en.GetComponent<NavMeshAgent>().Warp(new Vector3(this.x/2, 0.675f, this.y)))
             {
                 Debug.Log("Warp successfull!");
                 en.GetComponent<enemyController>().enabled = true;
             }
+            /*
+            GameObject en2 = Instantiate(enemy, new Vector3(this.x/2, 0.675f, 1), Quaternion.identity).gameObject;
+            en2.GetComponent<NavMeshAgent>().enabled = true;
+            if(en2.GetComponent<NavMeshAgent>().Warp(new Vector3(this.x/2, 0.675f, 1)))
+            {
+                Debug.Log("Warp successfull!");
+                en2.GetComponent<enemyController>().enabled = true;
+            }
+            */
             shaderFix.changeShader();
         }
     }

@@ -12,6 +12,7 @@ public class playerDied : MonoBehaviour {
 	{
 		if(other.tag == "Player")
 		{
+			Debug.Log("Player died!");
 			gameController.GetComponent<jumpScareController>().enabled = true;
 		}
 	}

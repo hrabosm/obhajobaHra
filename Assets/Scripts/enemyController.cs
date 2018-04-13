@@ -24,6 +24,7 @@ public class enemyController : MonoBehaviour {
 		Debug.Log(agent.pathStatus);
 		Debug.Log("Generating new destination.");
 		agent.destination = globalVars.pickablesList[Random.Range(0,lenght)].transform.position;
+		robotAnim.SetBool("standing", false);
 		Debug.Log("Getting to my destination.");
 		StartCoroutine(Wait());
 	}
@@ -37,7 +38,8 @@ public class enemyController : MonoBehaviour {
 		Debug.Log("I am here!");
 		agent.speed = tempSpeed;
 		robotAnim.SetBool("running", false);
-		yield return new WaitForSeconds(10);
+		robotAnim.SetBool("standing", true);
+		yield return new WaitForSeconds(5);
 		travelTo();
 	}
 	void OnTriggerEnter(Collider other)
@@ -56,6 +58,7 @@ public class enemyController : MonoBehaviour {
 				if(hit.transform.tag == "Player")
 				{
 					agent.speed *= 2f;
+					robotAnim.SetBool("standing", false);
 					robotAnim.SetBool("running", true);
 					agent.destination = hit.transform.position;
 				}

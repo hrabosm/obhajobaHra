@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class useScript : MonoBehaviour {
 
@@ -10,14 +11,20 @@ public class useScript : MonoBehaviour {
 	private Material tempMat;
 	public Material highlightedMat;
 	public Camera playerCam;
+	public Text counter;
 	public int examCounter;
+	void Start()
+	{
+		counter.text = "0";
+	}
 	private void PickUp()
 	{
 		if(highlightedObj != null && highlightedObj.tag == "usable" && highlightedObj.name.Contains("PickablePLaceHolder"))
 		{
-			Destroy(highlightedObj);
+			highlightedObj.SetActive(false);
 			highlightedObj = null;
 			examCounter++;
+			counter.text = examCounter.ToString();
 		}
 	}
 	void FixedUpdate ()
