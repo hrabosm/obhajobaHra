@@ -16,11 +16,15 @@ public class playerController : MonoBehaviour {
 	void Start ()
 	{
 		controller = GetComponent<CharacterController>();
-		//Cursor.visible = false;
+		
 	}
 	void Update () 
 	{
-		Cursor.lockState = CursorLockMode.Locked;
+		if(Cursor.lockState != CursorLockMode.Locked || Cursor.visible)
+		{
+			Cursor.lockState = CursorLockMode.Locked;
+			Cursor.visible = false;
+		}
 		moveDir = new Vector3(Input.GetAxis("Horizontal"),0 ,Input.GetAxis("Vertical"));
 		moveDir = transform.TransformDirection(moveDir);
 		player.transform.Rotate(new Vector3(0, Input.GetAxis("Mouse X") * sensitivity, 0));
