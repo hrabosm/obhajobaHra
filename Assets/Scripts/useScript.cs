@@ -16,7 +16,7 @@ public class useScript : MonoBehaviour {
 	public GameObject winScreen;
 	void Start()
 	{
-		counter.text = "0";
+		counter.text = "0/7";
 	}
 	private void PickUp()
 	{
