@@ -13,6 +13,7 @@ public class useScript : MonoBehaviour {
 	public Camera playerCam;
 	public Text counter;
 	public int examCounter;
+	public GameObject winScreen;
 	void Start()
 	{
 		counter.text = "0";
@@ -24,7 +25,12 @@ public class useScript : MonoBehaviour {
 			highlightedObj.SetActive(false);
 			highlightedObj = null;
 			examCounter++;
-			counter.text = examCounter.ToString();
+			counter.text = examCounter.ToString() +"/7";
+		}
+		else if(highlightedObj != null && highlightedObj.tag == "usable" && highlightedObj.name.Contains("DoorPlaceHolder") && examCounter == 7)
+		{
+			winScreen.SetActive(true);
+			Time.timeScale = 0.0f;
 		}
 	}
 	void FixedUpdate ()
