@@ -53,7 +53,7 @@ public class enemyController : MonoBehaviour {
 		agent.speed = tempSpeed;
 		robotAnim.SetFloat("Speed", 0f);
 		walking.mute = true;
-		walking.mute = true;
+		running.mute = true;
 		yield return new WaitForSeconds(5);
 		travelTo();
 	}
