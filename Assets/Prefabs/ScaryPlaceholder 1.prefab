@@ -1847,6 +1847,8 @@ MonoBehaviour:
   maxRange: 20
   walking: {fileID: 82957001646104754}
   running: {fileID: 82117453073386736}
+  color: {r: 1, g: 0.3602941, b: 0.3602941, a: 0}
+  robotFlashLight: {fileID: 108331573493619560}
 --- !u!114 &114794777136692616
 MonoBehaviour:
   m_ObjectHideFlags: 1

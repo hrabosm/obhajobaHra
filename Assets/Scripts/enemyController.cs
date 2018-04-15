@@ -14,6 +14,9 @@ public class enemyController : MonoBehaviour {
 	private float runningSpeed = 1.75f;
 	public AudioSource walking;
 	public AudioSource running;
+	public Color color;
+	public Light robotFlashLight;
+	private Color tempColor;
 	void Start () 
 	{
 		robotAnim = transform.GetChild(0).GetComponent<Animator>();
@@ -22,6 +25,7 @@ public class enemyController : MonoBehaviour {
 		tempSpeed = agent.speed;
 		walking.enabled = true;
 		running.enabled = true;
+		tempColor = robotFlashLight.color;
 		travelTo();
 	}
 	private void travelTo()
@@ -29,6 +33,9 @@ public class enemyController : MonoBehaviour {
 		Debug.Log(agent.pathStatus);
 		Debug.Log("Generating new destination.");
 		agent.destination = globalVars.pickablesList[Random.Range(0,lenght)].transform.position;
+		robotFlashLight.color = tempColor;
+		robotFlashLight.spotAngle = 50f;
+		robotFlashLight.intensity = 0.5f;
 		robotAnim.SetFloat("Speed", 1f);
 		walking.mute = false;
 		running.mute = true;
@@ -71,6 +78,9 @@ public class enemyController : MonoBehaviour {
 						robotAnim.SetFloat("Speed",2f);
 						walking.mute = true;
 						running.mute = false;
+						robotFlashLight.color = color;
+						robotFlashLight.spotAngle = 40f;
+						robotFlashLight.intensity = 0.75f;
 					}
 					Debug.Log(robotAnim.GetFloat("Speed"));
 					agent.destination = hit.transform.position;
