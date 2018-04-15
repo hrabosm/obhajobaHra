@@ -6,6 +6,7 @@ public class tutorialController : MonoBehaviour {
 
 	public GameObject tutorialMovement;
 	public GameObject tutorialOther;
+	public GameObject tutorialText;
 	private bool moved = false;
 	void Update () 
 	{
@@ -21,6 +22,7 @@ public class tutorialController : MonoBehaviour {
 		yield return new WaitForSeconds(5);
 		Destroy(tutorialMovement);
 		Destroy(tutorialOther);
+		Destroy(tutorialText);
 		gameObject.GetComponent<tutorialController>().enabled = false;
 	}
 }

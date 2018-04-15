@@ -7,6 +7,7 @@ public class jumpScareController : MonoBehaviour {
 	public GameObject jumpScareCam;
 	public playerController playerController;
 	public AudioSource jumpScareSound;
+	public GameObject youLostScreen;
 
 	void Start () 
 	{
@@ -15,5 +16,11 @@ public class jumpScareController : MonoBehaviour {
 		playerController.enabled = false;
 		jumpScareCam.SetActive(true);
 		jumpScareSound.enabled = true;
+		StartCoroutine(wait());
+	}
+	IEnumerator wait()
+	{
+		yield return new WaitForSeconds(2);
+		youLostScreen.SetActive(true);
 	}
 }
